@@ -1,0 +1,89 @@
+<Window x:Class="VisitorManagementSystem.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:userControls="clr-namespace:VisitorManagementSystem" 
+        Title="MainWindow" Name="MainWindow1" Height="768" Width="1024" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Topmost="True" WindowState="Maximized" MaxWidth="1024" MaxHeight="768">
+    <Grid Name="MainGrid" x:FieldModifier="public">
+        <Grid x:Name="KeyboardGrid">
+            <Canvas x:Name="KeyboardCanvas" x:FieldModifier="public" HorizontalAlignment="Left" Height="342" Margin="0,768,0,0" VerticalAlignment="Top" Width="1024" Visibility="Visible">
+                <userControls:NumericKeyboard x:FieldModifier="public" Width="1024" Height="352" HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="UserNumericKeyboard" BorderThickness="1" BorderBrush="Black"/>
+                <userControls:SymbolKeyboard x:FieldModifier="public" Width="1024" Height="352" HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="UserSymbolKeyboard" BorderThickness="1" BorderBrush="Black"/>
+                <userControls:CharacterKeyboard x:FieldModifier="public" Width="1024" Height="352" HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="UserKeyboard" BorderThickness="1" BorderBrush="Black"/>
+
+                <Canvas.Resources>
+                    <Storyboard x:Key="HideAnimation" Storyboard.TargetProperty="Margin">
+                        <ThicknessAnimation x:Name="Animation" From="0,416,0,0" To="0,768,0,0" Duration="0:0:0.2"/>
+                    </Storyboard>
+
+                    <Storyboard x:Key="ShowAnimation" Storyboard.TargetProperty="Margin">
+                        <ThicknessAnimation From="0,768,0,0" To="0,416,0,0" Duration="0:0:0.2"/>
+                    </Storyboard>
+                </Canvas.Resources>
+            </Canvas>
+        </Grid>
+
+        <Grid Name="PresentationScreens" x:FieldModifier="public">
+            <Grid x:Name="PrintingGrid" x:FieldModifier="public" Height="286" HorizontalAlignment="Center" VerticalAlignment="Center" Width="824" Margin="1800,50,0,0">
+                <TextBlock FontSize="50" FontWeight="SemiBold" HorizontalAlignment="Left" Margin="15,15,0,194" Text="Printing your visitor pass" TextWrapping="Wrap" Width="745"/>
+                <TextBlock Text="Ensure that you wear you pass while you're at Garin College, as it helps identify and provide assistance to you." TextWrapping="Wrap" FontSize="20" FontWeight="SemiBold" Foreground="DimGray" Height="59" Margin="15,92,64,0" VerticalAlignment="Top"/>
+                <TextBlock Name="InformationBlock" Text="Your visitor pass is valid until [time]. If you need to stay longer, come back to the Office and you will be issued with a new pass." TextWrapping="Wrap" FontSize="20" FontWeight="SemiBold" Foreground="DimGray" Height="59" Margin="15,168,64,0" VerticalAlignment="Top"/>
+                <TextBlock Text="Once you have finished your visit, depart via the Office so that you can sign out." TextWrapping="Wrap" FontSize="20" FontWeight="SemiBold" Foreground="DimGray" Height="33" Margin="15,247,64,0" VerticalAlignment="Top"/>
+            </Grid>
+            <Grid Height="500" HorizontalAlignment="Center" x:FieldModifier="public" Name="TimeGrid" VerticalAlignment="Center" Width="824" Opacity="1.0" Margin="1850,0,0,0">
+                <TextBlock FontSize="30" FontWeight="SemiBold" Height="47" HorizontalAlignment="Left" Margin="15,15,0,0" Text="When will you leave?" VerticalAlignment="Top" Width="796" />
+                <Label Content="Select the approximate time you intend to leave Garin College." FontSize="20" FontWeight="SemiBold" Foreground="DimGray" Height="43" Margin="10,55,18,0" VerticalAlignment="Top" />
+                <userControls:TimePicker x:Name="LeaveTimePicker" x:FieldModifier="public"/>
+
+                <Button Background="#FF0080FF" BorderBrush="Black" BorderThickness="0" Content="Finish" FontSize="18" FontWeight="SemiBold" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="180" Height="45" Click="NextButton_Click" Margin="0,0,16,0" />
+            </Grid>
+
+            <Grid Height="300" HorizontalAlignment="Center" x:FieldModifier="public" Name="ToSeeGrid" VerticalAlignment="Top" Width="824" Opacity="1.0" Margin="1850,58,0,0">
+                <TextBlock FontSize="30" FontWeight="SemiBold" Height="47" HorizontalAlignment="Left" Margin="15,15,0,0" Text="Who are you here to see?" VerticalAlignment="Top" Width="796" />
+                <Label Content="If you're not visiting anyone in particular, you can leave this field blank." FontSize="20" FontWeight="SemiBold" Foreground="DimGray" Height="43" Margin="10,55,18,0" VerticalAlignment="Top" />
+                <TextBox Name="ToSeeField" TabIndex="1" x:FieldModifier="public" BorderBrush="Black" BorderThickness="2" FontSize="18" Height="45" HorizontalAlignment="Stretch" Margin="16,110,16,0" Padding="10,0,10,0" TextWrapping="Wrap" VerticalAlignment="Top" VerticalContentAlignment="Center" SelectionBrush="#FF0080FF" MaxLength="100" />
+
+                <Button Background="#FF0080FF" BorderBrush="Black" BorderThickness="0" Content="Next" FontSize="18" FontWeight="SemiBold" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="180" Height="45" Click="NextButton_Click" Margin="0,0,16,0" />
+            </Grid>
+
+            <Grid Height="300" HorizontalAlignment="Center" x:FieldModifier="public" Name="LocationGrid" VerticalAlignment="Top" Width="824" Opacity="1.0" Margin="1850,58,0,0">
+                <TextBlock FontSize="30" FontWeight="SemiBold" Height="47" HorizontalAlignment="Left" Margin="15,15,0,0" Text="Where are you from?" VerticalAlignment="Top" Width="796" />
+                <Label Content="Enter the organisation where you're from, and then tap Next." FontSize="20" FontWeight="SemiBold" Foreground="DimGray" Height="43" Margin="10,55,18,0" VerticalAlignment="Top" />
+                <TextBox Name="LocationField" TabIndex="1" x:FieldModifier="public" BorderBrush="Black" BorderThickness="2" FontSize="18" Height="45" HorizontalAlignment="Stretch" Margin="16,110,16,0" Padding="10,0,10,0" TextWrapping="Wrap" VerticalAlignment="Top" VerticalContentAlignment="Center" SelectionBrush="#FF0080FF" MaxLength="100" />
+
+                <Button Background="#FF0080FF" BorderBrush="Black" BorderThickness="0" Content="Next" FontSize="18" FontWeight="SemiBold" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="180" Height="45" Click="NextButton_Click" Margin="0,0,16,0" />
+            </Grid>
+
+            <!--Margin="1024,0,0,0"-->
+            <Grid Height="300" HorizontalAlignment="Center" x:FieldModifier="public" Name="NameGrid" VerticalAlignment="Top" Width="824" Opacity="1.0" Margin="1850,58,0,0">
+                <TextBlock FontSize="30" FontWeight="SemiBold" Height="47" HorizontalAlignment="Left" Margin="15,15,0,0" Text="What's your name?" VerticalAlignment="Top" Width="796" />
+                <Label Content="Enter your name, and then tap Next." FontSize="20" FontWeight="SemiBold" Foreground="DimGray" Height="43" Margin="10,55,18,0" VerticalAlignment="Top" />
+                <TextBox Name="NameField" TabIndex="1" x:FieldModifier="public" BorderBrush="Black" BorderThickness="2" FontSize="18" Height="45" HorizontalAlignment="Stretch" Margin="16,110,16,0" Padding="10,0,10,0" TextWrapping="Wrap" VerticalAlignment="Top" VerticalContentAlignment="Center" SelectionBrush="#FF0080FF" MaxLength="100" />
+
+                <Button Background="#FF0080FF" BorderBrush="Black" BorderThickness="0" Content="Next" FontSize="18" FontWeight="SemiBold" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="180" Height="45" Click="NextButton_Click" Margin="0,0,16,0" />
+            </Grid>
+
+            <Grid x:Name="WelcomeGrid" x:FieldModifier="public" Height="450" HorizontalAlignment="Center" VerticalAlignment="Center" Width="824" Margin="0,0,0,0">
+                <TextBlock Name="GreetingBlock" FontSize="50" FontWeight="SemiBold" Height="185" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="15,15,0,0" Text="Kia ora, welcome to Garin College" TextWrapping="Wrap" Width="531"/>
+                <Label Content="Tap next to sign in to Garin College as a visitor." FontSize="20" FontWeight="SemiBold" Foreground="DimGray" Height="43" Margin="14,152,10,0" VerticalAlignment="Top"/>
+
+                <Button Background="#FF0080FF" BorderBrush="Black" BorderThickness="0" Content="Next" FontSize="18" FontWeight="SemiBold" Foreground="White" Height="45" HorizontalAlignment="Right" VerticalAlignment="Bottom" Name="NextButton" Width="180" Click="NextButton_Click" Margin="0,0,16,0" />
+            </Grid>
+            <Button Content="Settings" HorizontalAlignment="Left" Margin="939,10,0,0" VerticalAlignment="Top" Width="75" Click="Settings_Click"/>
+
+            <Label Content="Session ID: null" x:FieldModifier="public" Name="SessionIDLabel" FontSize="15" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="573"/>
+            <Label Content="Release Mode (Build 5)" FontWeight="DemiBold" FontSize="15" HorizontalAlignment="Left" Margin="10,36,0,0" Name="label1" VerticalAlignment="Top" Width="573" />
+        </Grid>
+    </Grid>
+
+    <Window.Resources>
+        <Storyboard x:Key="GridSlideOut">
+            <DoubleAnimation From="1.0" To="0.0" Storyboard.TargetProperty="Opacity" Duration="0:0:0.35"></DoubleAnimation>
+            <ThicknessAnimation To="-1900,0,0,0" Storyboard.TargetProperty="Margin" Duration="0:0:0.35" AccelerationRatio="0.5"></ThicknessAnimation>
+        </Storyboard>
+
+        <Storyboard x:Key="GridSlideIn">
+            <DoubleAnimation From="0.0" To="1.0" Storyboard.TargetProperty="Opacity" Duration="0:0:0.35"></DoubleAnimation>
+            <ThicknessAnimation From="1900,0,0,0" To="0,52,0,0" Storyboard.TargetProperty="Margin" Duration="0:0:0.35" AccelerationRatio="0.5"></ThicknessAnimation>
+        </Storyboard>
+    </Window.Resources>
+</Window>

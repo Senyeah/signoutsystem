@@ -1,0 +1,10 @@
+﻿<UserControl x:Class="VisitorManagementSystem.Keyboard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Background="#FF5A5A5A" d:DesignHeight="352" d:DesignWidth="1024">
+    <Canvas Name="KeyCanvas">
+        
+    </Canvas>
+</UserControl>
